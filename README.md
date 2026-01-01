@@ -77,3 +77,5 @@ age: reference=35.00, current=62.44, change=78.4%, status=DRIFT DETECTED
 income: reference=39800.00, current=62500.00, change=57.0%, status=DRIFT DETECTED
 
 OVERALL STATUS: DRIFT DETECTED
+=======
+# mlops-drift-detection-starter
