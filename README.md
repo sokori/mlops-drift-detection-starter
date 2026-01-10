@@ -1,81 +1,36 @@
-# Data Drift Detection – MLOps V0
+# 🚀 MLOps Data Drift Monitoring System (V1.0)
 
-## Overview
+A professional monitoring pipeline that detects statistical drift in production data using **PostgreSQL**, **Docker**, and **Python**.
 
-Machine learning systems assume that future data looks like past data.
-In real production environments, this assumption often breaks.
+## 🏗️ Architecture
+- **Storage:** PostgreSQL (Running in Docker)
+- **Infrastructure:** Docker Compose
+- **Simulation:** Automated data injector (`stream_data.py`)
+- **Monitoring:** Statistical drift detection engine (`compare_data.py`)
 
-This project demonstrates a **simple, explainable data drift detection system**
-that compares historical (reference) data with current data and reports
-significant changes.
+## 🛠️ Quick Start
 
-This is a foundational MLOps capability and a common real-world pain point.
-
----
-
-## What Problem Does This Solve?
-
-Data drift occurs when incoming data changes over time while systems continue
-to operate normally.
-
-This leads to:
-- Silent model degradation
-- Incorrect business decisions
-- Delayed detection of issues
-
-Traditional monitoring (CPU, memory, logs) does NOT detect this.
-
----
-
-## What This Project Does
-
-- Loads reference and current datasets
-- Computes basic statistics per feature
-- Measures percentage change in feature distributions
-- Applies a configurable threshold
-- Generates a human-readable drift report
-
-No machine learning model is required.
-
----
-
-## Project Structure
-
-mlops-data-drift/
-├── data/
-│ ├── reference_data.csv
-│ └── current_data.csv
-├── src/
-│ └── compare_data.py
-├── reports/
-│ └── drift_report.txt
-└── README.md
-
-
----
-
-## How to Run
-
-### Requirements
-- Python 3.8+
-- pandas
-
-Install dependencies:
+### 1. Start the Database
 ```bash
-pip install pandas
-Run drift detection:
+docker compose up -d
+2. Initialize Data
+Move your baseline CSV data into the SQL Warehouse:
 
+Bash
 
+python3 migrate_to_db.py
+3. Run Monitoring Loop
+Simulate new incoming production data and check for drift:
+
+Bash
+
+# Inject 50 new rows
+python3 src/stream_data.py
+
+# Analyze drift and log to history
 python3 src/compare_data.py
-The drift report will be generated at:
+📊 Database Schema
+The system maintains a drift_history table in PostgreSQL to track model health over time, allowing for long-term trend analysis.
 
 
-reports/drift_report.txt
-Example Output
-==============
-age: reference=35.00, current=62.44, change=78.4%, status=DRIFT DETECTED
-income: reference=39800.00, current=62500.00, change=57.0%, status=DRIFT DETECTED
-
-OVERALL STATUS: DRIFT DETECTED
-=======
-# mlops-drift-detection-starter
+---
