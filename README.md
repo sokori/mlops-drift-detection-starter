@@ -16,18 +16,16 @@ docker compose up -d
 2. Initialize Data
 Move your baseline CSV data into the SQL Warehouse:
 
-Bash
 
 python3 migrate_to_db.py
 3. Run Monitoring Loop
 Simulate new incoming production data and check for drift:
 
-Bash
 
-# Inject 50 new rows
+# Inject 50 new rows into the 'current_data' table
 python3 src/stream_data.py
 
-# Analyze drift and log to history
+# Analyze drift and log results to the 'drift_history' table
 python3 src/compare_data.py
 📊 Database Schema
 The system maintains a drift_history table in PostgreSQL to track model health over time, allowing for long-term trend analysis.
