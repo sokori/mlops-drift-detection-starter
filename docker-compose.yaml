@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: sokori
-      POSTGRES_PASSWORD: yourpassword  # We will move this to .env later
+      POSTGRES_PASSWORD: postgres  # We will move this to .env later
       POSTGRES_DB: drift_data
     ports:
       - "5432:5432"

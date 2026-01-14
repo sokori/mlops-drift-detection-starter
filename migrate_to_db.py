@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 import os
 
 # Connection to your running Docker container
-DB_URL = "postgresql://sokori:yourpassword@localhost:5432/drift_data"
+DB_URL = "postgresql://sokori:postgres@localhost:5432/drift_data"
 engine = create_engine(DB_URL)
 
 def migrate():
